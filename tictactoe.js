@@ -55,7 +55,17 @@ function GameController() {
 
     const checkWinState = () => {
         // check lineups
+        winner = checkWinner();
 
+        if (winner!=-1) {
+            console.log(`${winner} wins!`);
+            document.getElementById("instruction").textContent = `${winner} wins!! Board reset: X's turn.`;
+            board.resetGrid();
+            activePlayer = players[0];
+            return true;
+        }
+
+        //check tie game
         gameEnd = true;
         for (let i=0; i < 9; i++) {
             if (board.getGrid()[i] === -1) {
@@ -68,11 +78,37 @@ function GameController() {
             console.log("Tie Game!");
             document.getElementById("instruction").textContent = "Tie Game! Board reset: X's turn.";
             board.resetGrid();
-            activePlayer = player[0];
+            activePlayer = players[0];
             return true;
         }
 
         return false;
+    }
+
+    const checkWinner = () => {
+        b = board.getGrid();
+        console.log("checking winner...")
+        //check rows
+        for (let i=0; i < 9; i+=3) {
+            if (b[i] !== -1 && b[i] === b[i+1] && b[i+1] === b[i+2]) {
+                console.log("matching row!");
+                return b[i];
+            }
+        }
+        //check columns
+        for (let i=0; i < 3; i+=1) {
+            if (b[i] !== -1 && b[i] === b[i+3] && b[i+3] === b[i+6]) {
+                console.log("matching column!");
+                return b[i];
+            }
+        }
+        //check diagonals
+        if ((b[0]===b[4] && b[4]===b[8]) || (b[2]===b[4] && b[4]===b[6])) {
+            if (b[4]!=-1) console.log("matching diagonal!");
+            return b[4];
+        }
+        
+        return -1;
     }
 
     return {playRound, getActivePlayer}
