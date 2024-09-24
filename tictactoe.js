@@ -1,3 +1,5 @@
+document.querySelector(".result").close();
+
 function Gameboard() {
     let grid = [-1, -1, -1, -1, -1, -1, -1, -1, -1]
 
@@ -23,7 +25,7 @@ function Gameboard() {
 
 function GameController() {
     const board = Gameboard();
-
+    
     const players = ['X', 'O']
     let activePlayer = players[0];
 
@@ -58,10 +60,7 @@ function GameController() {
         winner = checkWinner();
 
         if (winner!=-1) {
-            console.log(`${winner} wins!`);
-            document.getElementById("instruction").textContent = `${winner} wins!! Board reset: X's turn.`;
-            board.resetGrid();
-            activePlayer = players[0];
+            endGame(`${winner} wins!`);
             return true;
         }
 
@@ -75,14 +74,24 @@ function GameController() {
         }
 
         if (gameEnd === true) {
-            console.log("Tie Game!");
-            document.getElementById("instruction").textContent = "Tie Game! Board reset: X's turn.";
-            board.resetGrid();
-            activePlayer = players[0];
+            endGame("Tie game!")
             return true;
         }
 
         return false;
+    }
+
+    const endGame = (message) => {
+        console.log(message);
+        document.getElementById("instruction").textContent = `X's turn`;
+        const result = document.querySelector(".result");
+        result.querySelector("h2").textContent = message;
+        result.showModal();
+        document.querySelector(".result-close").addEventListener("click", function () {
+            result.close();
+        });
+        board.resetGrid();
+        activePlayer = players[0];
     }
 
     const checkWinner = () => {
@@ -111,6 +120,9 @@ function GameController() {
         return -1;
     }
 
+    document.querySelector("#reset").addEventListener("click", () => {
+        endGame("Board Reset");
+    });
     return {playRound, getActivePlayer}
 }
 

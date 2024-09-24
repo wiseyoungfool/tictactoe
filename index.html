@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="style.css">
-    <script src="tictactoe.js"></script>
 </head>
 <body>
+    <dialog class="result">
+        <div class="result-message">
+            <h2>Game End</h2>
+            <button class="result-close">Close</button>
+        </div>
+    </dialog>
     <h1 id="instruction">X's Turn</h1>
     <div class="board">
         <button class="cell" id="0" onclick="game.playRound(0)"></button>
@@ -20,5 +25,7 @@
         <button class="cell" id="7" onclick="game.playRound(7)"></button>
         <button class="cell" id="8" onclick="game.playRound(8)"></button>
     </div>
+    <button id="reset">Reset Game</button>
+    <script src="tictactoe.js"></script>
 </body>
 </html>

@@ -43,10 +43,59 @@ body {
     background-color: orangered;
 }
 
+.result {
+    width: 20%;
+    height: 20%;
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    border: 0px solid black;
+    text-align: center;
+    justify-content: space-around;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-shadow: 20px 20px 20px black;
+}
+
+.result-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+.result-close {
+    margin: 5px;
+    padding: 5px;
+    background-color: blue;
+    color: white;
+    border: 0px solid blue;
+    border-radius: 10px;
+    padding: 20px;
+    transition: background-color 0.3s;
+}
+
 #instruction {
     color: white;
     margin: 20px;
     padding: 20px;
     background-color: black;
     border-radius: 20px;
+}
+
+#reset {
+    color: white;
+    background-color: black;
+    padding: 20px;
+    width: 10%;
+    margin: 30px;
+    border: 0px solid black;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+#reset:hover, .result-close:hover {
+    background-color: orangered;
+    cursor: pointer;
 }
