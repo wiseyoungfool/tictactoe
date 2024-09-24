@@ -89,9 +89,9 @@ function GameController() {
         result.showModal();
         document.querySelector(".result-close").addEventListener("click", function () {
             result.close();
+            board.resetGrid();
+            activePlayer = players[0];
         });
-        board.resetGrid();
-        activePlayer = players[0];
     }
 
     const checkWinner = () => {
